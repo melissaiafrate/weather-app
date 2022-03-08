@@ -33,3 +33,23 @@ li {
   max-width: 600px;
   padding: 20px;
 }
+.weather-temperature {
+  float: left;
+}
+.weather-temperature img {
+  height: 64px;
+  margin-right: 10px;
+  width: 64px;
+}
+.weather-temperature strong {
+  font-size: 64px;
+  line-height: 1;
+}
+.units {
+  font-size: 16px;
+  top: -33px;
+  position: relative;
+}
+.units a {
+  text-decoration: none;
+}

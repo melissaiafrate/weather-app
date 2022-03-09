@@ -24,10 +24,18 @@
     <div class="container">
       <div class="weather-app-wrapper">
         <div class="weather-app">
+          <div class="enter-city">
+        <form id="city-search-form">
+          <label>Enter city:</label>
+          <input type="text" id="city-text-input" placeholder="Search" autocomplete="off"/>
+          <input type="submit" value="Go" />
+        </form>
+        <button type="button" class="btn btn-primary" role="button" id="current-location-button">Current Location</a>
+      </div>
           <h1 id="current-city-forecast"></h1>
           <ul>
             <li id="today-date"></li>
-            <li>Last updated: <span id="last-update-time"></span></li>
+            <li id="current-time">Last updated: <span id="last-update-time"></span></li>
           </ul>
           <div class="row">
             <div class="col-6">
@@ -40,12 +48,12 @@
                 />
                 <div style="float: left">
                   <strong id="today-temp-number">0</strong>
-                  <span class="units"> °C | <a href="#">°F</a> </span>
+                  <span class="units"> <a href="#" id="celsius-link" class="active">°C</a> | <a href="#" id="fahrenheit-link">°F</a> </span>
                 </div>
               </div>
             </div>
             <div class="col-6">
-              <ul>
+              <ul class="weather-description">
                 <li id="weather-description"></li>
                 <li>Humidity: <span id="humidity"></span>%</li>
                 <li>Wind: <span id="wind-speed"></span> km/h</li>

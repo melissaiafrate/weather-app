@@ -1,4 +1,3 @@
-let now = new Date();
 function formatDate(datestamp) {
   let days = [
     "Sunday",
@@ -51,6 +50,7 @@ function showTemperature(response) {
   let todayDate = document.querySelector("#today-date");
   let updatedTime = document.querySelector("#last-update-time");
   let weatherIcon = document.querySelector("#weather-icon");
+  celsiusTemperature = response.data.main.temp;
   todayTempNumber.innerHTML = Math.round(response.data.main.temp);
   forecastCity.innerHTML = response.data.name;
   description.innerHTML = response.data.weather[0].description;
@@ -65,9 +65,62 @@ function showTemperature(response) {
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
   console.log(response);
 }
+function search(city) {
+  let apiKey = "e4386934c81dcc4d977985af91d7aadd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-let apiKey = "e4386934c81dcc4d977985af91d7aadd";
-let city = "Toronto";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showTemperature);
+}
 
-axios.get(apiUrl).then(showTemperature);
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#city-text-input");
+  search(cityInput.value);
+}
+
+function showPosition(position) {
+  console.log(position);
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = "e4386934c81dcc4d977985af91d7aadd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function showCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#today-temp-number");
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(fahrenheitTemp);
+}
+
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#today-temp-number");
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  temperature.innerHTML = Math.round(celsiusTemperature);
+}
+
+let now = new Date();
+
+let form = document.querySelector("#city-search-form");
+form.addEventListener("submit", handleSubmit);
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", showCurrentPosition);
+
+let celsiusTemperature = null;
+
+let celsius = document.querySelector("#celsius-link");
+celsius.addEventListener("click", showCelsiusTemp);
+
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", showFahrenheitTemp);

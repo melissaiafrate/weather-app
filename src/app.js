@@ -50,6 +50,7 @@ function showTemperature(response) {
   let currentWindSpeed = document.querySelector("#wind-speed");
   let todayDate = document.querySelector("#today-date");
   let updatedTime = document.querySelector("#last-update-time");
+  let weatherIcon = document.querySelector("#weather-icon");
   todayTempNumber.innerHTML = Math.round(response.data.main.temp);
   forecastCity.innerHTML = response.data.name;
   description.innerHTML = response.data.weather[0].description;
@@ -57,11 +58,16 @@ function showTemperature(response) {
   currentWindSpeed.innerHTML = Math.round(response.data.wind.speed);
   todayDate.innerHTML = formatDate(response.data.dt * 1000);
   updatedTime.innerHTML = formatTime(response.data.dt * 1000);
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
   console.log(response);
 }
 
 let apiKey = "e4386934c81dcc4d977985af91d7aadd";
-let city = "Barcelona";
+let city = "Toronto";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(showTemperature);

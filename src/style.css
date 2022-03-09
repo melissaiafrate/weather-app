@@ -37,12 +37,13 @@ li {
   float: left;
 }
 .weather-temperature img {
-  height: 64px;
-  margin-right: 10px;
-  width: 64px;
+  height: 100px;
+  margin-right: 5px;
+  margin-top: -18px;
+  width: 100px;
 }
 .weather-temperature strong {
-  font-size: 64px;
+  font-size: 70px;
   line-height: 1;
 }
 .units {

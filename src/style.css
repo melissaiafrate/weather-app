@@ -53,3 +53,6 @@ li {
 .units a {
   text-decoration: none;
 }
+#weather-description {
+  text-transform: capitalize;
+}

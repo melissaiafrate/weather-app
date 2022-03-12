@@ -29,6 +29,7 @@ function formatDate(datestamp) {
   let fullDate = `${day} ${month} ${date}, ${year}`;
   return fullDate;
 }
+
 function formatTime(timestamp) {
   let hour = now.getHours();
   let minutes = now.getMinutes();
@@ -63,8 +64,38 @@ function showTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
+  displayForecast();
+
   console.log(response);
 }
+
+function displayForecast() {
+  let forecast = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Sat", "Sun", "Mon", "Tues", "Wed", "Thurs"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+              <div class="col-2 weather-forecast-days">
+                <div class="weather-forecast-dates">
+                  Mon
+                </div>
+                <img src="#"
+                alt="Weather Icon"
+                width="36">
+                <div class="weather-forecast-temperatures">
+                  <span class="weather-forecast-temp-max">12°</span>
+                  <span class="weather-forecast-temp-min">5°</span>
+                </div>
+                </div>
+              `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecast.innerHTML = forecastHTML;
+}
+
 function search(city) {
   let apiKey = "e4386934c81dcc4d977985af91d7aadd";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -124,3 +155,5 @@ celsius.addEventListener("click", showCelsiusTemp);
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", showFahrenheitTemp);
+
+displayForecast();

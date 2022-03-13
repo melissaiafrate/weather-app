@@ -29,6 +29,12 @@ li {
   padding: 20px;
 }
 .weather-app {
+  background: linear-gradient(
+    93.1deg,
+    rgb(238, 254, 183) 19.1%,
+    rgb(169, 254, 222) 53.9%,
+    rgb(90, 222, 255) 92%
+  );
   border: 1px solid #bebebe;
   border-radius: 10px;
   margin: 30px 0 15px 0;

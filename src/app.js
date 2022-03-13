@@ -42,6 +42,15 @@ function formatTime(timestamp) {
   return fullTime;
 }
 
+function getForecast(coordinates) {
+  let cityLon = coordinates.lon;
+  let cityLat = coordinates.lat;
+  let apiKey = "e4386934c81dcc4d977985af91d7aadd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&units=metric&appid=${apiKey}`;
+
+  axios.get(apiUrl).then(showForecast);
+}
+
 function showTemperature(response) {
   let todayTempNumber = document.querySelector("#today-temp-number");
   let forecastCity = document.querySelector("#current-city-forecast");
@@ -64,12 +73,13 @@ function showTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
-  displayForecast();
 
+  getForecast(response.data.coord);
   console.log(response);
 }
 
-function displayForecast() {
+function showForecast(response) {
+  console.log(response.data);
   let forecast = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -155,5 +165,3 @@ celsius.addEventListener("click", showCelsiusTemp);
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", showFahrenheitTemp);
-
-displayForecast();

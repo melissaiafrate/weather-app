@@ -153,23 +153,6 @@ function showCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-function showFahrenheitTemp(event) {
-  event.preventDefault();
-  let temperature = document.querySelector("#today-temp-number");
-  celsius.classList.remove("active");
-  fahrenheit.classList.add("active");
-  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
-  temperature.innerHTML = Math.round(fahrenheitTemp);
-}
-
-function showCelsiusTemp(event) {
-  event.preventDefault();
-  let temperature = document.querySelector("#today-temp-number");
-  celsius.classList.add("active");
-  fahrenheit.classList.remove("active");
-  temperature.innerHTML = Math.round(celsiusTemperature);
-}
-
 let now = new Date();
 
 let form = document.querySelector("#city-search-form");
@@ -179,11 +162,5 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", showCurrentPosition);
 
 let celsiusTemperature = null;
-
-let celsius = document.querySelector("#celsius-link");
-celsius.addEventListener("click", showCelsiusTemp);
-
-let fahrenheit = document.querySelector("#fahrenheit-link");
-fahrenheit.addEventListener("click", showFahrenheitTemp);
 
 search("Toronto");

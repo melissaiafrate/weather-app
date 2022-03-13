@@ -185,3 +185,5 @@ celsius.addEventListener("click", showCelsiusTemp);
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", showFahrenheitTemp);
+
+search("Toronto");
